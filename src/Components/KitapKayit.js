@@ -7,10 +7,12 @@ export default function KitapKayit() {
         yazari:"",
         basim:"",
         sayfaAdedi:"",
-        ozet:""
+        ozet:"",
+        adet:""
     })
     const adiHandler=(e)=>{
         setkitap({...kitap,adi:e.target.value.toLocaleUpperCase()})
+        
     }
     const yazariHandler=(e)=>{
         setkitap({...kitap,yazari:e.target.value.toLocaleUpperCase()})
@@ -24,15 +26,19 @@ export default function KitapKayit() {
     const ozetHandler=(e)=>{
         setkitap({...kitap,ozet:e.target.value.toLocaleUpperCase()})
     }
+    const adetHandler=(e)=>{
+        setkitap({...kitap, adet:e.target.value})
+    }
     const submitHandler=()=>{
         if(kitap.adi===""){alert("Kitap adını girmediniz")}
         else if(kitap.yazari===""){alert("Yazar adını girmediniz")}
         else if(kitap.basim===""){alert("Basım yılını girmediniz")}
         else if(kitap.sayfaAdedi===""){alert("Sayfa sayısını girmediniz")}
         else if(kitap.ozet===""){alert("Özeti girmediniz")}
+        else if(kitap.adet===""){alert("Adeti girmediniz")}
         else{
             fire.database().ref(`kitaplar/${kitap.adi}`).set(kitap);
-            setkitap({adi:"",yazari:"",basim:"",sayfaAdedi:"", ozet:""})
+            setkitap({adi:"",yazari:"",basim:"",sayfaAdedi:"", ozet:"", adet:""})
         }
         
     }
@@ -43,7 +49,8 @@ export default function KitapKayit() {
         <input value={kitap.yazari} onChange={yazariHandler} className="form-control form-control-lg mb-3" type="text" placeholder="Yazarı..." />
         <input value={kitap.basim} onChange={basimHandler} className="form-control form-control-lg mb-3" type="text" placeholder="Basım Yılı..." />
         <input value={kitap.sayfaAdedi} onChange={sayfaAdediHandler} className="form-control form-control-lg mb-3" type="text" placeholder="Sayfa Adedi..." />
-        <textarea value={kitap.ozet} onChange={ozetHandler} className="form-control form-control-lg mb-3" rows="3" placeholder="Özet..." />    
+        <input value={kitap.adet} onChange={adetHandler} className="form-control form-control-lg mb-3" type="number" placeholder="Kitap Adeti..." />
+        <textarea value={kitap.ozet} onChange={ozetHandler} className="form-control form-control-lg mb-3" rows="3" placeholder="Özet..." />            
         <button onClick={submitHandler} type="button" className="btn btn-primary">EKLE</button>
       </div>
     )

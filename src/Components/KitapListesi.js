@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import fire from "../fBase";
+import Kitap from "./Kitap";
 
 export default function KitapListesi() {
   const [liste, setliste] = useState([]);
@@ -14,27 +15,25 @@ export default function KitapListesi() {
       });
   },[]);
 
+  
+
   return (
     <div>
       <table className="table table-hover table-light mt-5">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Sıra No</th>
             <th scope="col">Kitap Adı</th>
-            <th scope="col">Yazari</th>
-            <th scope="col">Sayfa Sayısı</th>
+            <th scope="col">Yazarı</th>
+            <th scope="col">Stok Durumu</th>
+            <th scope="col">Durum</th>
           </tr>
         </thead>
 
         <tbody>
-          {liste.map((kitap, index) => {
+          {liste.map((kitap,index) => {
             return (
-              <tr key={index}>
-                <th scope="row">{index}</th>
-                <td>{kitap.adi}</td>
-                <td>{kitap.yazari}</td>
-                <td>{kitap.sayfaAdedi}</td>
-              </tr>
+              <Kitap key={index} kitap={kitap} index={index} />
             );
           })}
         </tbody>
